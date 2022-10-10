@@ -1,6 +1,6 @@
 {
-  "name": "untitled1",
-  "version": "0.0.0",
+  "name": "itmo-docker-task-5",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "npx tsc",
