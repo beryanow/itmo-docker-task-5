@@ -60,7 +60,7 @@ docker push msberyanov/itmo-docker-task-5:1.0.0
 docker pull msberyanov/itmo-docker-task-5:1.0.0
 ```
 
-И запустить:
+И запустить контейнер:
 ```text
 docker run msberyanov/itmo-docker-task-5:1.0.0
 ```
