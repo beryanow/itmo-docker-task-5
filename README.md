@@ -65,7 +65,9 @@ docker pull msberyanov/itmo-docker-task-5:1.0.0
 docker run msberyanov/itmo-docker-task-5:1.0.0
 ```
 
-# [добавлено в недавней лабораторной] с помощью docker-compose запускаем два контейнера (первый с базой, второй – с приложением-счетчиком:
+#### Добавлено в недавней лабораторной (docker-compose)
+
+C помощью docker-compose запускаем два контейнера (первый с базой, второй – с приложением-счетчиком:
 ```text
 docker-compose up
 ```
