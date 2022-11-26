@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter; docker images
       - name: Deploy to server
         run: >
           ssh -T root@${{ secrets.SSH_HOST }} "docker ps -aq | xargs docker stop | xargs docker rm;
