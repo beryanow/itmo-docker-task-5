@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: msberyanov/postgres
+    image: msberyanov/itmo-postgres
     container_name: itmo-postgres
     environment:
       POSTGRES_DB: $POSTGRES_DB
