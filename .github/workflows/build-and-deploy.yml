@@ -1,4 +1,4 @@
-name: Build And Push Book Library Frontend Docker Image
+name: Build + Push + Deploy ITMO Counter
 
 on:
   push:
@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-#      - name: Install SSH key
-#        uses: shimataro/ssh-key-action@v2
-#        with:
-#          key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          known_hosts: 'not_empty'
-#      - name: Add known hosts
-#        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-#      - name: Login to server
-#        run: ssh -T root@${{ secrets.SSH_HOST }} exit
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: 'not_empty'
+      - name: Add known hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Login to server
+        run: ssh -T root@${{ secrets.SSH_HOST }} exit
       - name: Build Docker image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter
       - name: Login to Docker Hub
