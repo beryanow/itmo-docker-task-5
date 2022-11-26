@@ -34,6 +34,6 @@ jobs:
           ssh -T root@${{ secrets.SSH_HOST }} "docker ps -aq | xargs docker stop | xargs docker rm;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
-          docker run -e POSTGRES_DB=counter_info -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
+          docker run -d -e POSTGRES_DB=${{ secrets.POSTGRES_DB }} -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} -p 5432:5432 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
           docker run -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
           exit"
