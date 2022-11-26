@@ -14,7 +14,6 @@ services:
       - ${POSTGRES_PORT}:5432
     restart: unless-stopped
   itmo-task:
-    image: "msberyanov/itmo-counter"
     depends_on:
       - postgres
     build: .
