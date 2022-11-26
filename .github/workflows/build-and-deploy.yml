@@ -25,11 +25,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Push Docker image
-        run: docker images; docker push ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
+      - name: Push Counter Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
+      - name: Push Postgres Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
       - name: Deploy to server
         run: >
           ssh -T root@${{ secrets.SSH_HOST }} "docker ps -aq | xargs docker stop | xargs docker rm;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
+          docker run -d -p 5432:5432 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
           docker run -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
           exit"
