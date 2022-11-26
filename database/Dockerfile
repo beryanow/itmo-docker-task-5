@@ -1,0 +1,16 @@
+FROM postgres
+
+ARG POSTGRES_DB
+ARG POSTGRES_USER
+ARG POSTGRES_PASSWORD
+
+ENV POSTGRES_DB=$POSTGRES_DB
+ENV POSTGRES_USER=$POSTGRES_USER
+ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+ENV PGDATA=/data/postgres
+
+VOLUME postgres /data/postgres
+VOLUME ./postgres_init.sql /docker-entrypoint-initdb.d/init.sql
+
+RUN printenv
+EXPOSE 5432
