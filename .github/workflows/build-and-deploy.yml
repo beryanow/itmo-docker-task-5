@@ -36,5 +36,5 @@ jobs:
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
           docker run -d -e POSTGRES_DB=${{ secrets.POSTGRES_DB }} -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} -p 5432:5432 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-postgres;
-          docker run -d -e ITMO_TASK_DATABASE_URL=postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@0.0.0.0:${{ secrets.POSTGRES_PORT }}/counter_info -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
+          docker run -d -e ITMO_TASK_DATABASE_URL=postgresql://postgres:postgres@0.0.0.0:5432/counter_info -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/itmo-counter;
           exit"
