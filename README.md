@@ -73,7 +73,24 @@ docker-compose up
 ```
 Кратко, внутрь прокидываются переменные окружения из файла .env, счетчик цепляется к базе и производит запросы через pg-promise. База PostgreSQL.
 
-#### Добавлено в недавней (снова) лабораторной (ci / cd)
+#### Добавлено в недавней лабораторной (ci / cd)
 
 Добавлены GitHub Actions скрипты для автоматической сборки и развертывания приложения. 
 Разворачивание происходит на физический сервер. 
+
+#### Добавлено в недавней лабораторной (кластеризация)
+
+Предлагается использовать OpenShift-манифесты - для deployment'ов и service'ов.
+Допустим имеем развернутый OpenShift / Kubernetes, либо локально запущенный (minikube).
+Команды для обработки шаблона deployment, применения сервисов для каждого приложения:
+
+```text
+oc process -f openshift/itmo-counter/deployment-template.yml -p IMAGE_TAG=latest | oc apply -f -
+oc apply -f openshift/itmo-counter/service.yml
+
+oc process -f openshift/itmo-postgres/deployment-template.yml -p IMAGE_TAG=latest | oc apply -f -
+oc apply -f openshift/itmo-postgres/service.yml
+```
+
+Таким образом, для деплоймента счетчика указываются 4 реплики - будут созданы 4 подов, смотрящие на базу (которая создается другим деплойментом). 
+Общение между ними происходит через сервисы. При желании, для доступа извне можно организовать route.
